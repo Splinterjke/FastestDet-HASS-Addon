@@ -1,0 +1,31 @@
+configuration:
+  ha_url:
+    name: Home Assistant URL
+    description: "Your Home Assistant URL (e.g., http://homeassistant.local:8123)"
+  ha_token:
+    name: Long-Lived Access Token
+    description: "Generate in HA Profile -> Long-Lived Access Tokens"
+  camera_entity:
+    name: Camera Entity
+    description: "The camera entity ID to monitor (e.g., camera.front_door)"
+  mqtt_broker:
+    name: MQTT Broker
+    description: "MQTT broker hostname or IP"
+  mqtt_port:
+    name: MQTT Port
+    description: "MQTT broker port (default: 1883)"
+  mqtt_user:
+    name: MQTT Username
+    description: "MQTT username (leave empty if not required)"
+  mqtt_pass:
+    name: MQTT Password
+    description: "MQTT password (leave empty if not required)"
+  mqtt_base_topic:
+    name: MQTT Base Topic
+    description: "Base topic for all MQTT messages"
+  check_interval:
+    name: Check Interval (seconds)
+    description: "How often to check the camera (e.g., 1.0 for 1 FPS)"
+  detection_threshold:
+    name: Detection Threshold
+    description: "Confidence threshold for detection (0.0 to 1.0)"

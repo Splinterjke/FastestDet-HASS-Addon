@@ -1,0 +1,40 @@
+name: "FastestDet Person Detector (NCNN)"
+version: "1.0.0"
+slug: "fastestdet_ncnn"
+description: "Ultra-fast person detection using FastestDetV2 NCNN (ARM optimized)"
+url: "https://github.com/Splinterjke/FastestDet-HASS-Addon"
+arch:
+  - armhf
+  - armv7
+  - aarch64
+  - amd64
+startup: application
+stage: experimental
+boot: auto
+init: false
+options:
+  ha_url: "http://homeassistant.local:8123"
+  ha_token: ""
+  camera_entity: "camera.your_camera"
+  mqtt_broker: "homeassistant.local"
+  mqtt_port: 1883
+  mqtt_user: ""
+  mqtt_pass: ""
+  mqtt_base_topic: "fastestdet"
+  check_interval: 1.0
+  detection_threshold: 0.55
+  log_level: "info"
+schema:
+  ha_url: str
+  ha_token: password
+  camera_entity: str
+  mqtt_broker: str
+  mqtt_port: port
+  mqtt_user: str
+  mqtt_pass: password
+  mqtt_base_topic: str
+  check_interval: float
+  detection_threshold: float
+  log_level: list(trace|debug|info|notice|warning|error|fatal)?
+map:
+  - config:ro

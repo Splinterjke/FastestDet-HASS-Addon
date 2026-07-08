@@ -1,0 +1,43 @@
+version: "3.8"
+
+services:
+  fastestdet_person_onnx:
+    platform: linux/arm64
+    build:
+      context: ./fastestdet_ha_onnx
+      dockerfile: dev.Dockerfile
+    container_name: fastestdet_person
+    restart: unless-stopped
+    network_mode: host
+    volumes:
+      - ./fastestdet_ha_onnx/ha_person_detector.py:/app/ha_person_detector.py
+    environment:
+      - HA_URL=http://localhost:8123
+      - HA_TOKEN=YOUR_LONG_LIVED_ACCESS_TOKEN
+      - CAMERA_ENTITY=camera.doorbell
+      - MQTT_BROKER=localhost
+      - MQTT_PORT=1883
+      - MQTT_USER=guest                     
+      - MQTT_PASS=guest                 
+      - MODEL_PATH=/models/FastestDetV2.onnx
+      - CHECK_INTERVAL=1                            
+
+  fastestdet_person_ncnn:
+    platform: linux/arm64
+    build:
+      context: ./fastestdet_ha_ncnn
+      dockerfile: dev.Dockerfile
+    container_name: fastestdet_person
+    restart: unless-stopped
+    network_mode: host
+    volumes:
+      - ./fastestdet_ha_ncnn/ha_person_detector.py:/app/ha_person_detector.py
+    environment:
+      - HA_URL=http://localhost:8123
+      - HA_TOKEN=YOUR_LONG_LIVED_ACCESS_TOKEN
+      - CAMERA_ENTITY=camera.doorbell
+      - MQTT_BROKER=localhost
+      - MQTT_PORT=1883
+      - MQTT_USER=guest                     
+      - MQTT_PASS=guest                 
+      - CHECK_INTERVAL=1                            
