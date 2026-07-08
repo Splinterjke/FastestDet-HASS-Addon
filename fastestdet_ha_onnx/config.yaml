@@ -1,5 +1,5 @@
 name: "FastestDet Person Detector (ONNX)"
-version: "1.0.0"
+version: "1.0.1"
 slug: "fastestdet_onnx"
 description: "Ultra-fast person detection using FastestDetV2 ONNX"
 url: "https://github.com/Splinterjke/FastestDet-HASS-Addon"
@@ -23,6 +23,8 @@ options:
   mqtt_base_topic: "fastestdet"
   check_interval: 1.0
   detection_threshold: 0.55
+  consecutive_detections_required: 2
+  consecutive_non_detections_required: 3
   log_level: "info"
 schema:
   ha_url: str
@@ -35,6 +37,8 @@ schema:
   mqtt_base_topic: str
   check_interval: float
   detection_threshold: float
+  consecutive_detections_required: int
+  consecutive_non_detections_required: int
   log_level: list(trace|debug|info|notice|warning|error|fatal)?
 map:
   - config:ro

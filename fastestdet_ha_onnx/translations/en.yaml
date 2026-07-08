@@ -25,7 +25,13 @@ configuration:
     description: "Base topic for all MQTT messages"
   check_interval:
     name: Check Interval (seconds)
-    description: "How often to check the camera (e.g., 1.0 for 1 FPS)"
+    description: "How often to check the camera (e.g., 1.0 for 1 FPS, 0.5 for 2 FPS)"
   detection_threshold:
     name: Detection Threshold
-    description: "Confidence threshold for detection (0.0 to 1.0)"
+    description: "Confidence threshold for detection (0.0 to 1.0). Lower = more sensitive"
+  consecutive_detections_required:
+    name: Consecutive Detections Required
+    description: "Number of consecutive frames with person detected before triggering motion ON (debouncing, default: 2)"
+  consecutive_non_detections_required:
+    name: Consecutive Non-Detections Required
+    description: "Number of consecutive frames without person before triggering motion OFF (debouncing, default: 3)"

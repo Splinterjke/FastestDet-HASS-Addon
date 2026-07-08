@@ -30,6 +30,8 @@ BIN_PATH = "/models/fastestdetv2.bin"
 
 CHECK_INTERVAL = float(os.getenv("CHECK_INTERVAL", 1.0))
 DETECTION_THRESHOLD = float(os.getenv("DETECTION_THRESHOLD", 0.55))
+CONSECUTIVE_DETECTIONS_REQUIRED = int(os.getenv("CONSECUTIVE_DETECTIONS_REQUIRED", 2))
+CONSECUTIVE_NON_DETECTIONS_REQUIRED = int(os.getenv("CONSECUTIVE_NON_DETECTIONS_REQUIRED", 3))
 
 # Topics for entities
 TOPIC_MOTION = f"{MQTT_BASE_TOPIC}/binary_sensor/motion/person"
@@ -245,15 +247,13 @@ def main():
     mqtt_client.connect(MQTT_BROKER, MQTT_PORT, 60)
     setup_mqtt_discovery(mqtt_client)
     
-    CONSECUTIVE_DETECTIONS_REQUIRED = 2
-    CONSECUTIVE_NON_DETECTIONS_REQUIRED = 3
-    
     last_state = None
     consecutive_detections = 0
     consecutive_non_detections = 0
     last_annotated_image = None
     
-    logging.info("Starting detection loop...")
+    logging.info(f"Starting detection loop (interval={CHECK_INTERVAL}s, threshold={DETECTION_THRESHOLD})...")
+    logging.info(f"Debouncing: {CONSECUTIVE_DETECTIONS_REQUIRED} detections ON, {CONSECUTIVE_NON_DETECTIONS_REQUIRED} detections OFF")
     
     while True:
         loop_start_time = time.perf_counter()

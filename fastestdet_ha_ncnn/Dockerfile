@@ -1,6 +1,6 @@
 FROM python:3.10-slim
 
-ARG BUILD_VERSION="1.0.0"
+ARG BUILD_VERSION="1.0.1"
 ARG BUILD_ARCH="aarch64"
 
 LABEL \
