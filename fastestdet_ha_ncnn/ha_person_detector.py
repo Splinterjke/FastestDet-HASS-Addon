@@ -33,6 +33,10 @@ DETECTION_THRESHOLD = float(os.getenv("DETECTION_THRESHOLD", 0.55))
 CONSECUTIVE_DETECTIONS_REQUIRED = int(os.getenv("CONSECUTIVE_DETECTIONS_REQUIRED", 2))
 CONSECUTIVE_NON_DETECTIONS_REQUIRED = int(os.getenv("CONSECUTIVE_NON_DETECTIONS_REQUIRED", 3))
 
+# Snapshot dimensions
+SNAPSHOT_WIDTH = int(os.getenv("SNAPSHOT_WIDTH", 1280))
+SNAPSHOT_HEIGHT = int(os.getenv("SNAPSHOT_HEIGHT", 720))
+
 # Topics for entities
 TOPIC_MOTION = f"{MQTT_BASE_TOPIC}/binary_sensor/motion/person"
 TOPIC_PROCESSING_TIME = f"{MQTT_BASE_TOPIC}/sensor/processing_time"
@@ -148,7 +152,7 @@ def detection(net, img, input_width, input_height, thresh):
     return nms(np.array(pred)), processing_time_ms
 
 def get_ha_snapshot():
-    url = f"{HA_URL}/api/camera_proxy/{CAMERA_ENTITY}?width=1280&height=720" # query params are optional
+    url = f"{HA_URL}/api/camera_proxy/{CAMERA_ENTITY}?width={SNAPSHOT_WIDTH}&height={SNAPSHOT_HEIGHT}" # query params are optional
     headers = {"Authorization": f"Bearer {HA_TOKEN}"}
     try:
         response = requests.get(url, headers=headers, timeout=10)

@@ -1,5 +1,26 @@
 # Changelog
 
+## Version History Summary
+
+| Version | Date       | Highlights                                                     |
+|---------|------------|----------------------------------------------------------------|
+| 1.0.2   | 2026-07-09 | Configurable snapshot dimensions (width, height)               |
+| 1.0.1   | 2026-07-09 | Configurable debouncing parameters (consecutive detections)    |
+| 1.0.0   | 2026-07-09 | Initial release with ONNX and NCNN variants                    |
+
+## [1.0.2] - 2026-07-09
+
+### Added
+- **Configurable snapshot dimensions** via add-on settings:
+  - `snapshot_width` — Width of the camera snapshot in pixels (default: 1280)
+  - `snapshot_height` — Height of the camera snapshot in pixels (default: 720)
+- Allows fine-tuning bandwidth usage vs. detection accuracy
+- Smaller snapshots reduce network latency and processing time
+
+### Changed
+- Bumped add-on version to 1.0.2 in both `fastestdet_ncnn` and `fastestdet_onnx`
+- Updated documentation with performance optimization notes
+
 ## [1.0.1] - 2026-07-09
 
 ### Added
@@ -52,10 +73,3 @@
 - Input resolution: 352×352 (optimized for edge devices)
 - COCO-trained, detects "person" class (class 0) only
 - Docker base: `python:3.10-slim` (glibc for wheel compatibility)
-
-## Version History Summary
-
-| Version | Date       | Highlights                                                     |
-|---------|------------|----------------------------------------------------------------|
-| 1.0.1   | 2026-07-09 | Configurable debouncing parameters (consecutive detections)    |
-| 1.0.0   | 2026-07-09 | Initial release with ONNX and NCNN variants                    |
