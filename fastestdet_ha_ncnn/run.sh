@@ -15,11 +15,13 @@ CHECK_INTERVAL=$(jq --raw-output ".check_interval" $CONFIG_PATH)
 DETECTION_THRESHOLD=$(jq --raw-output ".detection_threshold" $CONFIG_PATH)
 CONSECUTIVE_DETECTIONS_REQUIRED=$(jq --raw-output ".consecutive_detections_required" $CONFIG_PATH)
 CONSECUTIVE_NON_DETECTIONS_REQUIRED=$(jq --raw-output ".consecutive_non_detections_required" $CONFIG_PATH)
+SNAPSHOT_WIDTH=$(jq --raw-output ".snapshot_width" $CONFIG_PATH)
+SNAPSHOT_HEIGHT=$(jq --raw-output ".snapshot_height" $CONFIG_PATH)
 LOG_LEVEL=$(jq --raw-output ".log_level" $CONFIG_PATH)
 
 export HA_URL HA_TOKEN CAMERA_ENTITY
 export MQTT_BROKER MQTT_PORT MQTT_USER MQTT_PASS MQTT_BASE_TOPIC
 export CHECK_INTERVAL DETECTION_THRESHOLD CONSECUTIVE_DETECTIONS_REQUIRED CONSECUTIVE_NON_DETECTIONS_REQUIRED
-export LOG_LEVEL
+export SNAPSHOT_WIDTH SNAPSHOT_HEIGHT LOG_LEVEL
 
 python3 /app/ha_person_detector.py

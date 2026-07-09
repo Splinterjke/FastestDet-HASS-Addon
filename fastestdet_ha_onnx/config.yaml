@@ -1,5 +1,5 @@
 name: "FastestDet Person Detector (ONNX)"
-version: "1.0.1"
+version: "1.0.2"
 slug: "fastestdet_onnx"
 description: "Ultra-fast person detection using FastestDetV2 ONNX"
 url: "https://github.com/Splinterjke/FastestDet-HASS-Addon"
@@ -8,6 +8,7 @@ arch:
   - armv7
   - aarch64
   - amd64
+  - i386
 startup: application
 stage: experimental
 boot: auto
@@ -25,6 +26,8 @@ options:
   detection_threshold: 0.55
   consecutive_detections_required: 2
   consecutive_non_detections_required: 3
+  snapshot_width: 1280
+  snapshot_height: 720
   log_level: "info"
 schema:
   ha_url: str
@@ -39,6 +42,8 @@ schema:
   detection_threshold: float
   consecutive_detections_required: int
   consecutive_non_detections_required: int
+  snapshot_width: int
+  snapshot_height: int
   log_level: list(trace|debug|info|notice|warning|error|fatal)?
 map:
   - config:ro

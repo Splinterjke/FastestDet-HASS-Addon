@@ -32,27 +32,9 @@ Consider the **NCNN version** if:
 - You have limited RAM (< 512MB)
 - You want the absolute lowest latency
 
-## Installation
+## Installation and configuration
 
-See the [main repository README](../README.md) for installation instructions.
-
-## Configuration
-
-All configuration is done through the Home Assistant add-on UI:
-
-| Option | Description | Default |
-|--------|-------------|---------|
-| `log_level` | Logging verbosity | `info` |
-| `ha_url` | Home Assistant URL | `http://homeassistant.local:8123` |
-| `ha_token` | Long-lived access token | *(required)* |
-| `camera_entity` | Camera entity ID | *(required)* |
-| `mqtt_broker` | MQTT broker address | `core-mosquitto` |
-| `mqtt_port` | MQTT broker port | `1883` |
-| `mqtt_user` | MQTT username | *(empty)* |
-| `mqtt_pass` | MQTT password | *(empty)* |
-| `mqtt_base_topic` | Base MQTT topic | `fastestdet` |
-| `check_interval` | Loop interval (seconds) | `1.0` |
-| `detection_threshold` | Confidence threshold | `0.55` |
+See the [main repository README](https://github.com/Splinterjke/FastestDet-HASS-Addon/blob/master/README.md) for installation and configuration instructions.
 
 ## Performance Benchmarks
 

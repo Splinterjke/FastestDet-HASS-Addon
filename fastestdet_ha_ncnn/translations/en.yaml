@@ -35,3 +35,9 @@ configuration:
   consecutive_non_detections_required:
     name: Consecutive Non-Detections Required
     description: "Number of consecutive frames without person before triggering motion OFF (debouncing, default: 3)"
+  snapshot_width:
+    name: Snapshot Width
+    description: "Width of the camera snapshot in pixels (default: 1280). Smaller values reduce bandwidth and loop processing time, resolution of annotated images."
+  snapshot_height:
+    name: Snapshot Height
+    description: "Height of the camera snapshot in pixels (default: 720). Smaller values reduce bandwidth, loop processing time, resolution of annotated images."

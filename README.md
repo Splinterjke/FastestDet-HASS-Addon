@@ -14,7 +14,7 @@ This repository provides two Home Assistant add-ons for real-time person detecti
 Both add-ons:
 - ✅ Detect persons from any Home Assistant camera
 - ✅ Create motion sensors via MQTT Discovery
-- ✅ Provide annotated images (first/last detection frames) in 1280x720 [(configurable via query parameters)](https://github.com/Splinterjke/FastestDet-HASS-Addon/blob/0e70c128bbc6ab6e2ed1753247b84f6e41ce5a7c/fastestdet_ha_ncnn/ha_person_detector.py#L149)
+- ✅ Provide annotated images (first/last detection frames)
 - ✅ Monitor processing time and loop performance
 - ✅ Work on ARM64 (aarch64) and x86_64 architectures
 - ✅ Ultra-lightweight (~300MB Docker image)
@@ -105,6 +105,19 @@ After a few seconds, you'll see new entities:
 - `camera.fastestdet_person_annotated_first` - First detection image
 - `camera.fastestdet_person_annotated_last` - Last detection image
 
+> [!NOTE]
+> **Loop time is highly dependent on the latency of the camera API call.**
+> 
+> The endpoint `{HA_URL}/api/camera_proxy/{CAMERA_ENTITY}?width={width}&height={height}` can vary significantly based on:
+> - Camera hardware and encoding
+> - Network latency between HA and the camera
+> - Snapshot resolution (larger = slower)
+> 
+> **Tips:**
+> - Configure snapshot dimensions via `snapshot_width` and `snapshot_height` to reduce bandwidth
+> - Decrease `check_interval` for more responsive detection (but higher CPU/network usage)
+> - Frequent API calls (e.g., 0.5s interval) may actually have **lower per-call latency** than infrequent calls due to connection keep-alive and caching effects. Feel free to go below 1.0s interval to get higher FPS, but set higher `consecutive_detections_required` and `consecutive_non_detections_required` correspondigly. I personally use 0.5s interval and 2 frames for ON and 6 frames for OFF.
+
 ## Configuration Options
 
 | Option | Description | Default | Example |
@@ -122,6 +135,8 @@ After a few seconds, you'll see new entities:
 | `detection_threshold` | Confidence threshold | `0.55` | `0.65` (stricter), `0.45` (more sensitive) |
 | `consecutive_detections_required` | Frames needed to trigger ON | `2` | `3` (less sensitive), `1` (instant) |
 | `consecutive_non_detections_required` | Frames needed to trigger OFF | `3` | `5` (longer presence), `1` (instant) |
+| `snapshot_width` | Camera snapshot width (px) | `1280` | `1920` (higher quality), `352` (lower bandwidth) |
+| `snapshot_height` | Camera snapshot height (px) | `720` | `1080` (higher quality), `197` (lower bandwidth) |
 
 ### Debouncing Parameters
 
